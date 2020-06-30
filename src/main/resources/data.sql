@@ -3,3 +3,14 @@ insert into USER values (102,'athyl@microsoft.com', 'athyl','laidani','admin', '
 insert into USER values (103,'tamim@dell.com', 'tamim','laidani','admin', 'ssn105', 'tamim566');
 insert into USER values (104,'oliver@dell.com', 'oliver','ogami','admin', 'ssn154', 'oli56f');
 insert into USER values (105,'nana@dell.com', 'nana','ploon','admin', 'ssn188', 'nanaT');
+insert into ORDERS values (1001, 'Order N°1', 101);
+insert into ORDERS values (1002, 'Order N°2', 101);
+insert into ORDERS values (1003, 'Order N°3', 101);
+insert into ORDERS values (1004, 'Order N°4', 102);
+insert into ORDERS values (1005, 'Order N°5', 102);
+insert into ORDERS values (1006, 'Order N°6', 103);
+insert into ORDERS values (1007, 'Order N°7', 104);
+insert into ORDERS values (1008, 'Order N°8', 104);
+insert into ORDERS values (1009, 'Order N°9', 104);
+insert into ORDERS values (1010, 'Order N°10', 105);
+insert into ORDERS values (1011, 'Order N°11', 105);

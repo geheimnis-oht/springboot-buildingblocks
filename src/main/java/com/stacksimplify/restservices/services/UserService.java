@@ -26,7 +26,7 @@ public class UserService {
 	public User createUser(User user) throws UserExistsException {
 		User existingUser = userRepository.findByUsername(user.getUsername());
 		if(existingUser != null) {
-		   throw new UserExistsException("User already exists ! Insertion abort.");	
+		   throw new UserExistsException("[Service Layer] - User already exists ! Insertion abort.");	
 		}	
 		return userRepository.save(user);
 		
@@ -36,7 +36,7 @@ public class UserService {
 	public Optional<User> getUserById(Long id) throws UserNotFoundException {
 		Optional<User> user = userRepository.findById(id);
 		if(!user.isPresent()) {
-		   throw new UserNotFoundException("User not found in Users Repository");	
+		   throw new UserNotFoundException("[Service Layer] - User with id='"+ id + "' not found in Users Repository");	
 		}
 		return user;
 	}
@@ -46,7 +46,7 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(id);
 		
 		if(!optionalUser.isPresent()) {
-			throw new UserNotFoundException("User not found in Users Repository, Please provide correct id");
+			throw new UserNotFoundException("[Service Layer] - User not found in Users Repository, Please provide correct id");
 		}
 		user.setId(id);
 		return userRepository.save(user);

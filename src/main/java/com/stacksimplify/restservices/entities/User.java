@@ -1,38 +1,43 @@
 package com.stacksimplify.restservices.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@NotBlank(message = "[[--> Username is Mandatory. please provide a valid username --]]")
-	@Column(name = "USER_NAME", length=50, nullable=false, unique=true)
+	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	private String username;
-	
+
 	@Size(min = 3, message = "[[--> First name should have at least 3 characters --]]")
-	@Column(name = "FIRST_NAME", length=50, nullable=false)
+	@Column(name = "FIRST_NAME", length = 50, nullable = false)
 	private String firstname;
-	@Column(name = "LAST_NAME", length=50, nullable=false)
+	@Column(name = "LAST_NAME", length = 50, nullable = false)
 	private String lastname;
-	@Column(name = "EMAIL_ADDRESS", length=50, nullable=false)
+	@Column(name = "EMAIL_ADDRESS", length = 50, nullable = false)
 	private String email;
-	@Column(name = "ROLE", length=50, nullable=false)
-	private String role;	
-	@Column(name = "SSN",length=50, nullable=false, unique=true)
+	@Column(name = "ROLE", length = 50, nullable = false)
+	private String role;
+	@Column(name = "SSN", length = 50, nullable = false, unique = true)
 	private String ssn;
-	
+
+	@OneToMany (mappedBy = "user")
+	private List<Order> orders;
+
 	public User() {
 	}
 
@@ -101,11 +106,20 @@ public class User {
 		this.ssn = ssn;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-//				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
-//	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
+	}
 	
+
 }

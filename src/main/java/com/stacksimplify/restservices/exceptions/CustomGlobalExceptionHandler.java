@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  *  TECH: @ControllerAdvice disable to use @RestControllerAdvice 
  */
 
-//@ControllerAdvice
+@ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@Override
@@ -44,7 +44,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		
 	}
 	/*
-	 * TECH : Handle UserNameNotFoundException
+	 * TECH : Handle UserNameNotFoundException using @ExceptionHandler
 	 */
 	@ExceptionHandler(UserNameNotFoundException.class)
 	protected ResponseEntity<Object> handleUserNameNotFoundException(
@@ -67,6 +67,5 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 			     request.getDescription(false));
 			
 		return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);	
-	}
-		
+	}	
 }

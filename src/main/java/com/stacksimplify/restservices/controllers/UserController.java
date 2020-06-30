@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,18 +30,19 @@ import com.stacksimplify.restservices.services.UserService;
 
 @RestController
 @Validated
+@RequestMapping(value = "/users")
 public class UserController {
    
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/users")
+	@GetMapping
 	List<User> getAllUsers(){
 		
 		return userService.getAllUsers();
 	}
 	
-	@PostMapping("/users")
+	@PostMapping
 	public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
 		try {
 			/*
@@ -61,7 +63,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public Optional<User> getUserById (@PathVariable("id") @Min(1) Long id) {
 	   try {
 		return userService.getUserById(id);
@@ -70,18 +72,18 @@ public class UserController {
 		}	
 	}
 	
-	@GetMapping("/users/byusername/{username}")
+	@GetMapping("/byusername/{username}")
 	public User getUserByUsername (@PathVariable("username") String username) throws UserNameNotFoundException {
 	    User user = userService.getUserByUsername(username);	
 	    
 	    if (user == null) {
-	    	throw new UserNameNotFoundException("Username : {" + username + "} not found in user repository");	
+	    	throw new UserNameNotFoundException("[Controller Layer] - Username : {" + username + "} not found in user repository");	
 	    } else {
 	    	return user;
 	    }  
 	}
 	
-	@PutMapping("/users/{id}")
+	@PutMapping("/{id}")
 	public User createUser(@PathVariable("id") Long id, @RequestBody User user) {
 		try {
 			return userService.updateUserById(id, user);
@@ -90,7 +92,7 @@ public class UserController {
 		}
 	}
 	 
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/{id}")
 	public String deleteUser(@PathVariable("id") Long id) {
 	  userService.deleteUserById(id);
 	  return "deletion completed !";
