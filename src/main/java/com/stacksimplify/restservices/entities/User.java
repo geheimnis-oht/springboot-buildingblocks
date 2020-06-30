@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name="user")
@@ -14,8 +17,11 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank(message = "[[--> Username is Mandatory. please provide a valid username --]]")
 	@Column(name = "USER_NAME", length=50, nullable=false, unique=true)
 	private String username;
+	
+	@Size(min = 3, message = "[[--> First name should have at least 3 characters --]]")
 	@Column(name = "FIRST_NAME", length=50, nullable=false)
 	private String firstname;
 	@Column(name = "LAST_NAME", length=50, nullable=false)

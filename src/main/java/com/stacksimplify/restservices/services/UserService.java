@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.stacksimplify.restservices.entities.User;
-import com.stacksimplify.restservices.exceptions.UserExistsExecption;
+import com.stacksimplify.restservices.exceptions.UserExistsException;
 import com.stacksimplify.restservices.exceptions.UserNotFoundException;
 import com.stacksimplify.restservices.repositories.UserRepository;
 
@@ -23,10 +23,10 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User createUser(User user) throws UserExistsExecption {
+	public User createUser(User user) throws UserExistsException {
 		User existingUser = userRepository.findByUsername(user.getUsername());
 		if(existingUser != null) {
-		   throw new UserExistsExecption("User already exists ! Insertion abort.");	
+		   throw new UserExistsException("User already exists ! Insertion abort.");	
 		}	
 		return userRepository.save(user);
 		
