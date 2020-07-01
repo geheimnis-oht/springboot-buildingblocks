@@ -68,7 +68,7 @@ public class OrderController {
 		if (!optionalOrder.isPresent()) {
 		  throw new UserNotFoundException("Order with id=" + orderid +" has not been found. "); 	
 		} else {
-			if (optionalOrder.get().getUser().getId() != userid) {
+			if (optionalOrder.get().getUser().getUserid() != userid) {
 				throw new UserNotFoundException("The Order with id=" + orderid +" belong to another user."); 	
 			}
 		}

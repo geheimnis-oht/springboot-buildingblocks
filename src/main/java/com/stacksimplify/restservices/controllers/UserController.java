@@ -37,8 +37,7 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping
-	List<User> getAllUsers(){
-		
+	List<User> getAllUsers(){		
 		return userService.getAllUsers();
 	}
 	
@@ -55,7 +54,7 @@ public class UserController {
 			 * TECH: Return ResponseEntity
 			 */
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(builder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+			headers.setLocation(builder.path("/users/{id}").buildAndExpand(user.getUserid()).toUri());
 			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 					
 		} catch (UserExistsException ex) {
