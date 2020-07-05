@@ -18,6 +18,7 @@
 		<java.version>1.8</java.version>
 		<org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
 		<org.apache.maven.plugins.version>3.8.1</org.apache.maven.plugins.version>
+		<springfox.documentation.swagger2.version>2.9.2</springfox.documentation.swagger2.version>
 	</properties>
 
 	<dependencies>
@@ -72,6 +73,27 @@
 		    <groupId>com.fasterxml.jackson.dataformat</groupId>
 		    <artifactId>jackson-dataformat-xml</artifactId>
 		    <version>2.11.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>${springfox.documentation.swagger2.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${springfox.documentation.swagger2.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-bean-validators</artifactId>
+		    <version>${springfox.documentation.swagger2.version}</version>
 		</dependency>		
 				
 		<dependency>

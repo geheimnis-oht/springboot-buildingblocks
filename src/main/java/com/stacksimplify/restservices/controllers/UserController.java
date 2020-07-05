@@ -1,7 +1,6 @@
 package com.stacksimplify.restservices.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -9,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +28,13 @@ import com.stacksimplify.restservices.exceptions.UserNameNotFoundException;
 import com.stacksimplify.restservices.exceptions.UserNotFoundException;
 import com.stacksimplify.restservices.services.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@Api(tags = "User Management REST service",
+description = "User Controller",
+value = "/users/")
 @RestController
 @Validated
 @RequestMapping(value = "/users")
@@ -36,13 +43,19 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping
+	@ApiOperation(value = "Retrieve All users")
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	List<User> getAllUsers(){		
 		return userService.getAllUsers();
 	}
 	
+	@ApiOperation(value = "Create a new user")
 	@PostMapping
-	public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
+	public ResponseEntity<Void> createUser(@ApiParam(value = "New User info to be created",
+	                                        required = true, type = "User") 
+	                                       @Valid 
+	                                       @RequestBody User user, 
+	                                       UriComponentsBuilder builder) {
 		try {
 			/*
 			 * Create and insert user
@@ -63,9 +76,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<User> getUserById (@PathVariable("id") @Min(1) Long id) {
+	public User getUserById (@PathVariable("id") @Min(1) Long id) {
 	   try {
-		return userService.getUserById(id);
+		return userService.getUserById(id).get();
 		} catch (UserNotFoundException ex) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
 		}	

@@ -13,18 +13,31 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonView;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModelProperty.AccessMode;
 
 @Entity
 @Table(name = "user")
 //@JsonIgnoreProperties({"firstname","lastname"})  - Static Filtering
 //@JsonFilter(value = "userFilter") // Dynamic Filtering
+@ApiModel(description = "this model is to create a user")
 public class User extends RepresentationModel{
+	@ApiModelProperty(notes="Auto generated Unique ID", required = true, position = 1)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonView(Views.External.class)
 	private Long userid;
 
+	@ApiModelProperty(notes="Username should be unique", 
+			          required = true, 
+			          position = 2,
+			          example = "'MLAIDANI'",
+			          accessMode = AccessMode.READ_WRITE,
+			          allowableValues = "[A-Za-z0-9_]" )
 	@NotBlank(message = "[[--> Username is Mandatory. please provide a valid username --]]")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	@JsonView(Views.External.class)
