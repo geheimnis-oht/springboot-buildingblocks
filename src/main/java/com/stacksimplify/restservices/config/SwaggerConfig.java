@@ -28,6 +28,10 @@ public class SwaggerConfig {
 	
 	/*
 	 * TECH : Hotfix of beans conflicts when using Swagger in Spring RestAPI
+	 * 
+	 * TECH : Swagger Links : http://localhost:8080/v2/api-docs
+	 *                        http://localhost:8088/swagger-ui.html
+	 *                        http://editor.swagger.io/
 	 */
 	@Primary
 	@Bean
