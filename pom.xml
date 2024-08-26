@@ -19,7 +19,7 @@
 		<java.version>1.8</java.version>
 		<org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
 		<org.apache.maven.plugins.version>3.8.1</org.apache.maven.plugins.version>
-		<springfox.documentation.swagger2.version>2.9.2</springfox.documentation.swagger2.version>
+		<springfox.documentation.swagger2.version>2.10.0</springfox.documentation.swagger2.version>
 	</properties>
 
 	<dependencies>
